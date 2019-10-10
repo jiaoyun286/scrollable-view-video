@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@+id/layout_float_video_container"
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/video_item_portrait_height"
+             android:visibility="invisible"
+             tools:visibility="visible">
+
+
+    <!--Offer a background for not full-screen Video source-->
+    <View
+        android:id="@+id/video_player_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone"
+        />
+
+    <com.brucetoo.listvideoplay.videomanage.ui.VideoPlayerView
+        android:id="@+id/video_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <!--Offer a mask view to cover the last played video
+    frame until current video frame start rendering -->
+    <ImageView
+        android:id="@+id/video_player_mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone"
+        />
+
+    <ProgressBar
+        android:id="@+id/video_progress_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/video_loading"
+        android:indeterminateDuration="500"
+        android:visibility="visible"
+        />
+
+    <ProgressBar
+        android:id="@+id/video_progress_bar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="bottom"
+        android:max="1000"
+        android:progress="0"
+        android:progressDrawable="@drawable/video_seek_bar_bg"
+        android:secondaryProgress="0"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/video_close_btn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="10dp"
+        android:src="@drawable/ic_media_close"
+        android:visibility="gone"
+        />
+
+</FrameLayout>

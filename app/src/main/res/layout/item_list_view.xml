@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_cover"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_item_portrait_height"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        tools:background="@color/colorAccent"
+        />
+
+    <!--This layout hold UI element testView on
+    the of cover image-->
+    <RelativeLayout
+        android:id="@+id/layout_play_area"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/video_item_portrait_height">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="VIDEO TITLE"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_media_play"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="#33000000"
+            android:padding="5dp"
+            android:text="10:10"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/layout_play_area"
+        android:background="@android:color/white"
+        android:padding="5dp">
+
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@color/colorAccent"
+            />
+
+        <TextView
+            android:id="@+id/tv_video_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/view_1"
+            android:text="Just Video"
+            android:textColor="@color/colorPrimary"
+            />
+
+    </RelativeLayout>
+</RelativeLayout>
