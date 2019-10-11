@@ -19,8 +19,9 @@ public class ItemChecker {
     private static final String TAG = "ItemChecker";
 
     /**
-     * Get next available tracker view in current listView
-     *
+     * 获取下一个完全可见的TrackView
+     * 获取策略根据followView位移时触边方向确定，顶部触边，则从上向下第一个完全可见item为TrackView，
+     * 底部触边，则从下向上第一个完全可见item未TrackView
      * @param listView current listView
      */
     public static View getNextTrackerView(ListView listView, IViewTracker tracker) {
@@ -30,7 +31,9 @@ public class ItemChecker {
         }
         int childCount = listView.getChildCount();
 
-        switch (tracker.getEdge()) {
+        int edge = tracker.getEdge();
+        Log.d(TAG,"edge = " + edge);
+        switch (edge) {
             case IViewTracker.TOP_EDGE:
             case IViewTracker.RIGHT_EDGE:
             case IViewTracker.LEFT_EDGE:

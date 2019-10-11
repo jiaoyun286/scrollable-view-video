@@ -33,7 +33,6 @@ gen-*/
 target/
 .idea/
 
-/build.gradle
 gradle/wrapper/*.properties
 *.keystore
 

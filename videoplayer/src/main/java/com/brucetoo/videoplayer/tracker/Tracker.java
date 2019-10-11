@@ -22,8 +22,8 @@ public class Tracker{
     private static ArrayMap<Activity, IViewTracker> mViewTrackers = new ArrayMap<>();
 
     /**
-     * Attach a activity with single {@link IViewTracker},and bind
-     * follower view into DecorView, so we can handle it
+     * 关联一个Activity和一个 {@link IViewTracker},并且绑定
+     * follower view 到 DecorView
      * @param context activity
      * @return IViewTracker
      */
