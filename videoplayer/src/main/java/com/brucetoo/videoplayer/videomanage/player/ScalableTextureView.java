@@ -93,12 +93,12 @@ public abstract class ScalableTextureView extends TextureView {
         switch (mScaleType) {
             case FILL:
                 if (viewWidth / viewHeight > contentWidth / contentHeight) {
-                    //video is higher than view
-                    if (contentWidth / contentHeight >= 1.5) { // 12:7 16:9,ignore some weired ratio like 720/564
+                    //播放器高度大于当前视图
+                    if (contentWidth / contentHeight >= 1.5) { // 12:7 16:9,忽略一些不常见的比例 720/564
                         scaleY = (contentHeight * viewWidth) / (viewHeight * contentWidth);
                     }
                 } else {
-                    //video is wider than view
+                    //播放器高度大于当前视图
                     scaleX = (viewHeight * contentWidth) / (viewWidth * contentHeight);
                 }
                 break;
@@ -158,9 +158,9 @@ public abstract class ScalableTextureView extends TextureView {
             case BOTTOM:
             case CENTER_CROP:
             case TOP:
-                if (mContentHeight > mContentWidth) { //Portrait video
+                if (mContentHeight > mContentWidth) { //竖向 video
                     fitCoef = viewWidth / (viewWidth * scaleX);
-                } else { //Landscape video
+                } else { //横向 video
                     fitCoef = viewHeight / (viewHeight * scaleY);
                 }
                 break;
