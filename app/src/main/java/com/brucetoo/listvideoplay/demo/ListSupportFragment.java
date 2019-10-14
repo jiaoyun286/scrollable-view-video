@@ -13,17 +13,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.brucetoo.listvideoplay.R;
-import com.brucetoo.videoplayer.scrolldetector.ListScrollDetector;
-import com.brucetoo.videoplayer.tracker.IViewTracker;
-import com.brucetoo.videoplayer.tracker.Tracker;
-import com.brucetoo.videoplayer.tracker.VisibleChangeListener;
-import com.brucetoo.videoplayer.videomanage.controller.DefaultControllerView;
-import com.brucetoo.videoplayer.videomanage.interfaces.PlayerItemChangeListener;
-import com.brucetoo.videoplayer.videomanage.interfaces.VideoPlayerListener;
-import com.brucetoo.videoplayer.videomanage.meta.DefaultMetaData;
-import com.brucetoo.videoplayer.videomanage.player.RatioImageView;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
+import com.nd.sdp.video.scrolldetector.ListScrollDetector;
+import com.nd.sdp.video.tracker.IViewTracker;
+import com.nd.sdp.video.tracker.Tracker;
+import com.nd.sdp.video.tracker.VisibleChangeListener;
+import com.nd.sdp.video.videomanager.controller.DefaultControllerView;
+import com.nd.sdp.video.videomanager.interfaces.PlayerItemChangeListener;
+import com.nd.sdp.video.videomanager.interfaces.VideoPlayerListener;
+import com.nd.sdp.video.videomanager.meta.DefaultMetaData;
+import com.nd.sdp.video.videomanager.player.RatioImageView;
 import com.squareup.picasso.Picasso;
 
 /**

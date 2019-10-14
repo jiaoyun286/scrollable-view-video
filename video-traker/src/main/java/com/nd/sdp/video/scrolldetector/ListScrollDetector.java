@@ -1,21 +1,19 @@
-package com.brucetoo.videoplayer.scrolldetector;
+package com.nd.sdp.video.scrolldetector;
 
 import android.util.Log;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.brucetoo.videoplayer.tracker.IViewTracker;
-import com.brucetoo.videoplayer.utils.ItemChecker;
 import com.brucetoo.videoplayer.utils.Reflecter;
+import com.nd.sdp.video.tracker.IViewTracker;
+import com.nd.sdp.video.utils.ItemChecker;
 
 /**
- * Created by Bruce Too
- * On 06/04/2017.
- * At 09:36
+ * @author JiaoYun
+ * @date 2019/10/14 21:36
  */
-
-public class ListScrollDetector implements IScrollDetector, AbsListView.OnScrollListener {
+public class ListScrollDetector implements AbsListView.OnScrollListener,IScrollDetector {
 
     private static final String TAG = "ListScrollDetector";
     private ListView mListView;

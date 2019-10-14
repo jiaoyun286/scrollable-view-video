@@ -1,4 +1,4 @@
-package com.brucetoo.videoplayer.utils;
+package com.nd.sdp.video.utils;
 
 import android.graphics.Rect;
 import android.support.v4.view.ViewCompat;
@@ -12,12 +12,10 @@ import android.view.animation.Interpolator;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by Bruce Too
- * On 7/12/16.
- * At 15:44
+ * @author JiaoYun
+ * @date 2019/10/14 22:02
  */
 public class ViewAnimator {
-
     View view;
 
     public ViewAnimator(View view) {
@@ -34,22 +32,13 @@ public class ViewAnimator {
         return new ViewAnimator(view);
     }
 
-    /**
-     * change the view to execute animator
-     *
-     * @param view view
-     * @return ViewAnimator
-     */
+
     public ViewAnimator andPutOn(View view) {
         this.view = view;
         return this;
     }
 
-    /**
-     * Wait system to finish inflate view,and get its size
-     *
-     * @param sizeListener callback when finished
-     */
+
     public void waitForSize(final Listeners.Size sizeListener) {
 
         view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -67,22 +56,14 @@ public class ViewAnimator {
         });
     }
 
-    /**
-     * get view's top value in global screen
-     *
-     * @return top value
-     */
+
     public float getY() {
         Rect rect = new Rect();
         view.getGlobalVisibleRect(rect);
         return rect.top;
     }
 
-    /**
-     * get view's x value = translationX + getLeft
-     *
-     * @return x value
-     */
+
     public float getX() {
         return ViewCompat.getX(view);
     }
@@ -238,11 +219,8 @@ public class ViewAnimator {
     }
 
 
-    /**
-     * this inner class used to executor animator
-     */
+
     public static class AnimatorExecutor {
-        //but < 14 there are nothing...
         final ViewPropertyAnimatorCompat animator;
         final ViewAnimator viewAnimator;
 
@@ -251,11 +229,7 @@ public class ViewAnimator {
         Listeners.Update updateListener;
         Listeners.Cancel cancelListener;
 
-        /**
-         * Constructor of AnimatorExecutor with {@link ViewAnimator}
-         *
-         * @param viewAnimator ViewAnimator to execute
-         */
+
         AnimatorExecutor(ViewAnimator viewAnimator) {
             this.animator = ViewCompat.animate(viewAnimator.view);
             this.viewAnimator = viewAnimator;
@@ -371,21 +345,12 @@ public class ViewAnimator {
             return this;
         }
 
-        /**
-         * get {@link ViewAnimator} from {@link AnimatorExecutor}
-         *
-         * @return ViewAnimator
-         */
+
         public ViewAnimator pullOut() {
             return viewAnimator;
         }
 
-        /**
-         * execute view animate subsequently
-         *
-         * @param view view to be animated
-         * @return AnimatorExecutor
-         */
+
         public AnimatorExecutor thenAnimate(View view) {
             ViewAnimator viewAnimator = new ViewAnimator(view);
             AnimatorExecutor animatorExecutor = viewAnimator.animate();
@@ -393,12 +358,6 @@ public class ViewAnimator {
             return animatorExecutor;
         }
 
-        /**
-         * execute view animate together
-         *
-         * @param view view to be animated
-         * @return AnimatorExecutor
-         */
         public AnimatorExecutor andAnimate(View view) {
             ViewAnimator viewAnimator = new ViewAnimator(view);
             AnimatorExecutor animatorExecutor = viewAnimator.animate();
@@ -408,7 +367,7 @@ public class ViewAnimator {
     }
 
     public static class Listeners {
-       public interface End {
+        public interface End {
             void onEnd();
         }
 
@@ -428,6 +387,4 @@ public class ViewAnimator {
             void onCancel();
         }
     }
-
-
 }
