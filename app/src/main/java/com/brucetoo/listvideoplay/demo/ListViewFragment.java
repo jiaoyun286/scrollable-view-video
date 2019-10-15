@@ -24,7 +24,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 import com.brucetoo.listvideoplay.videomanage.controller.ListScrollDistanceCalculator;
 import com.brucetoo.listvideoplay.videomanage.controller.VideoControllerView;
 import com.brucetoo.listvideoplay.videomanage.controller.ViewAnimator;

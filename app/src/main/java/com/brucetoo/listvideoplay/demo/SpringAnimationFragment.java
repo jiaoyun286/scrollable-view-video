@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 
 /**
  * Created by Bruce Too

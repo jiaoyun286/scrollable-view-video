@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.brucetoo.listvideoplay.Backable;
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.tracker.Tracker;
 
 /**
@@ -58,18 +58,20 @@ public class DetailFragment extends Fragment implements Backable {
     private float videoRootTransY;
     private float videoRootTransX;
     /**
-     * Keep the old tracker view in case we rollback when dismiss {@link DetailFragment}
-     * NOTE: if the {@link DetailFragment} contains a new {@link com.nd.sdp.video.scrolldetector.IScrollDetector}
-     * we also need keep the old one, and rollback it when dismiss {@link DetailFragment}
+     * 将上个页面的trackview保存下来，一遍返回是将视频容器视图在回滚到这个视图的位置
      */
     private View oldTrackerView;
 
+    /**
+     * 执行页面切换时，视频容器视图的转场动画，从前一个页面的trackview位置移动到当前页面的的新的trackview位置，中间可能伴随做尺寸变化
+     */
     private void startMoveInside() {
         //TODO check NPE
         videoRoot = (Tracker.getViewTracker(getActivity()).getFollowerView());
         oldTrackerView = Tracker.getViewTracker(getActivity()).getTrackerView();
         ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
         final int[] loc = new int[2];
+//        Tracker.changeTrackView(getActivity(),mImageCover);
         mImageCover.getLocationOnScreen(loc);
         videoRootParent = (View) videoRoot.getParent();
         final Rect rect = new Rect();
@@ -105,7 +107,7 @@ public class DetailFragment extends Fragment implements Backable {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                //we must simple change tracker view to new one when animation end
+                //确保动画执行结束时，视频区被移到了新的trackview位置
                 Tracker.changeTrackView(getActivity(),mImageCover);
                 mAnimateRunning = false;
             }
@@ -113,11 +115,17 @@ public class DetailFragment extends Fragment implements Backable {
         animator.setDuration(500);
         animator.start();
 
+        //详情视图转场时的动画
         ViewAnimator.putOn(mTextDetail).animate().translationY(-mTextDetail.getHeight() / 4, 0)
         .alpha(0,1);
     }
 
+    /**
+     * 执行退出当前页面动画，视频容器视图要回滚到上个页面的trackview的位置
+     * @param listener 动画执行过程的监听
+     */
     private void startMoveOutside(final Animator.AnimatorListener listener) {
+//        Tracker.changeTrackView(getActivity(),oldTrackerView);
         ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
         final int[] loc = new int[2];
         mImageCover.getLocationOnScreen(loc);
@@ -138,13 +146,13 @@ public class DetailFragment extends Fragment implements Backable {
             @Override
             public void onAnimationEnd(Animator animation) {
                 listener.onAnimationEnd(animation);
-                //rollback to old tracker view
+                //滚回到旧的trackview位置
                 Tracker.changeTrackView(getActivity(),oldTrackerView);
             }
         });
         animator.start();
 
-
+        //详情视图转场时的动画
         ViewAnimator.putOn(mTextDetail).animate().translationY(-mTextDetail.getHeight() / 4)
         .alpha(1,0);
     }

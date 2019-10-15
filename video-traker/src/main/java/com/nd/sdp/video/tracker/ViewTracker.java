@@ -389,6 +389,7 @@ public class ViewTracker implements IViewTracker, ViewTreeObserver.OnScrollChang
         Logger.i(TAG, "rebindViewToTracker locTo[0] -> " + locTo[0] + " locTo[1] -> " + locTo[1]);
         ViewAnimator.putOn(parent).translation(locTo[0], locTo[1])
                 .andPutOn(fromView).translation(0, 0);
+//        ViewAnimator.putOn(parent).animate().duration(500).translation(locTo[0],locTo[1]).start(null);
         mOriginX = locTo[0];
         mOriginY = locTo[1];
         mOriginWidth = toView.getWidth();

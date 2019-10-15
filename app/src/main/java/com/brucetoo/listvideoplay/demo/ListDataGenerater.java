@@ -15,29 +15,29 @@ public class ListDataGenerater {
 
     static {
         VideoModel m1 = new VideoModel();
-        m1.coverImage = "http://android-imgs.25pp.com/fs08/2017/02/09/0/84219701e196f9b98565bd9d1c5072bc.jpg";
+        m1.coverImage = "https://img-blog.csdnimg.cn/20190301125255914.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTAxMDE5OA==,size_16,color_FFFFFF,t_70";
 //        m1.videoUrl = "http://video.pp.cn/fs08/2017/02/09/9/200_b34d50d8820d19961f73f57359e4ca45.mp4";
-        m1.videoUrl = "http://video.pp.cn/fs08/2017/01/16/3/200_528893ee2d1573573679809fb7a75b70.mp4";
+        m1.videoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
 
         VideoModel m2 = new VideoModel();
-        m2.coverImage = "http://android-imgs.25pp.com/fs08/2017/03/27/1/4bf77f572889c1ae186ccc29e4439be4.jpg";
-        m2.videoUrl = "http://video.pp.cn/fs08/2017/03/27/1/200_fdacc7f4592b7c3eac4295239f922405.mp4";
+        m2.coverImage = "https://img-blog.csdnimg.cn/20190301125640791.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTAxMDE5OA==,size_16,color_FFFFFF,t_70";
+        m2.videoUrl = "http://mirror.aarnet.edu.au/pub/TED-talks/911Mothers_2010W-480p.mp4";
 
         VideoModel m3 = new VideoModel();
-        m3.coverImage = "http://android-imgs.25pp.com/fs08/2017/03/05/11/f74556e9d6e776a6abb85771f3632887.jpg";
-        m3.videoUrl = "http://video.pp.cn/fs08/2017/03/05/7/200_817dc48c75d8bdab6be56b41f1c6fac0.mp4";
+        m3.coverImage = "https://img-blog.csdnimg.cn/20190301125528758.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTAxMDE5OA==,size_16,color_FFFFFF,t_70";
+        m3.videoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
 
         VideoModel m4 = new VideoModel();
-        m4.coverImage = "http://android-imgs.25pp.com/fs08/2017/04/01/2/522bf786ea8c063d31c9e2b54892f086.jpg";
-        m4.videoUrl = "http://video.pp.cn/fs08/2017/04/01/3/41a840c8-a840-4f81-90ea-78393d1d5b33.mp4";
+        m4.coverImage = "https://s2.ax1x.com/2019/10/15/KCMNiF.png";
+        m4.videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
 
         VideoModel m5 = new VideoModel();
-        m5.coverImage = "http://android-imgs.25pp.com/fs08/2017/04/07/9/e6cdf397bb1bf1dcd963560ae17017a4.jpg";
-        m5.videoUrl = "http://video.pp.cn/fs08/2017/04/07/8/b416ce1e-a1e7-484b-95d8-2b1c839a2cab.mp4";
+        m5.coverImage = "https://s2.ax1x.com/2019/10/15/KC1xOA.md.png";
+        m5.videoUrl = "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4";
 
         VideoModel m6 = new VideoModel();
-        m6.coverImage = "http://android-imgs.25pp.com/fs08/2017/01/07/11/79f91004a25ddbbeecb562bd4256d727.jpg";
-        m6.videoUrl = "http://video.pp.cn/fs08/2017/01/07/7/200_237d8131df69467aee0ab0f28988a0df.mp4";
+        m6.coverImage = "https://s2.ax1x.com/2019/10/15/KC84V1.md.png";
+        m6.videoUrl = "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4";
 
         VideoModel m7 = new VideoModel();
         m7.coverImage = "http://android-imgs.25pp.com/fs08/2017/02/23/2/48da103a3a21d8a1dea01570bc35de8e.jpg";

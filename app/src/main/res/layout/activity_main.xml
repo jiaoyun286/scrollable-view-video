@@ -71,6 +71,12 @@
             android:onClick="onVideoSupport"
             android:text="List Video Play Surpport"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:onClick="onTrackerSupport"
+            android:text="Tracker Surpport"
+            />
 
         <Button
             android:layout_width="wrap_content"

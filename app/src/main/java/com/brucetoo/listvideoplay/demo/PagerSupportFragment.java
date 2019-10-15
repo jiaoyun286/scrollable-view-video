@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brucetoo.listvideoplay.Backable;
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.tracker.Tracker;
 
 /**

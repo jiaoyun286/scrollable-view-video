@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 
 import java.lang.ref.WeakReference;
 import java.util.Formatter;

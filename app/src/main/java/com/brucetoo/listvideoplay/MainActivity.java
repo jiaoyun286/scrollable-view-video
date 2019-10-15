@@ -22,6 +22,8 @@ import com.brucetoo.listvideoplay.demo.PagerSupportFragment;
 import com.brucetoo.listvideoplay.demo.RecyclerViewFragment;
 import com.brucetoo.listvideoplay.demo.RecyclerViewSmallScreenFragment;
 import com.brucetoo.listvideoplay.demo.SpringAnimationFragment;
+import com.brucetoo.listvideoplay.demo.TrackerSupportFragment;
+import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.tracker.Tracker;
 
 public class MainActivity extends AppCompatActivity {
@@ -137,6 +139,14 @@ public class MainActivity extends AppCompatActivity {
             .replace(R.id.layout_container, new PagerSupportFragment(), "PagerSupportFragment")
             .addToBackStack("PagerSupportFragment")
             .commit();
+    }
+
+    public void onTrackerSupport(View view){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.layout_container, new TrackerSupportFragment(), "TrackerSupportFragment")
+                .addToBackStack(null)
+                .commit();
     }
 
 

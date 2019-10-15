@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnticipateOvershootInterpolator;
 
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 import com.transitionseverywhere.ChangeBounds;
 import com.transitionseverywhere.TransitionManager;
 

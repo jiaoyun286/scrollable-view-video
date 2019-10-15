@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 import com.brucetoo.listvideoplay.videomanage.controller.VideoControllerView;
 import com.brucetoo.listvideoplay.videomanage.controller.ViewAnimator;
 import com.brucetoo.listvideoplay.videomanage.manager.SingleVideoPlayerManager;

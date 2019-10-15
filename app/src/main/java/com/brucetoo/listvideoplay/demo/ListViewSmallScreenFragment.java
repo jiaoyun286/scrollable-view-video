@@ -21,7 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.brucetoo.listvideoplay.R;
+import com.nd.sdp.bk.video.R;
 import com.brucetoo.listvideoplay.videomanage.controller.ListScrollDistanceCalculator;
 import com.brucetoo.listvideoplay.videomanage.controller.VideoControllerView;
 import com.brucetoo.listvideoplay.videomanage.controller.ViewAnimator;
@@ -187,13 +187,15 @@ public class ListViewSmallScreenFragment extends Fragment implements AbsListView
 
                 mVideoFloatContainer.setVisibility(View.INVISIBLE);
                 mCurrentPlayArea.setVisibility(View.VISIBLE);
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                if(getActivity() != null){
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    ViewAnimator.putOn(mVideoFloatContainer).translationY(0);
 
-                ViewAnimator.putOn(mVideoFloatContainer).translationY(0);
+                    //stop update progress
+                    mVideoProgressBar.setVisibility(View.GONE);
+                    mHandler.removeCallbacks(mProgressRunnable);
+                }
 
-                //stop update progress
-                mVideoProgressBar.setVisibility(View.GONE);
-                mHandler.removeCallbacks(mProgressRunnable);
             }
 
             @Override

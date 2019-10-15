@@ -12,9 +12,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.brucetoo.listvideoplay.R;
+import com.brucetoo.listvideoplay.MainActivity;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
+import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.scrolldetector.ListScrollDetector;
 import com.nd.sdp.video.tracker.IViewTracker;
 import com.nd.sdp.video.tracker.Tracker;
@@ -74,7 +75,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
                     if (trackerView != null && trackerView.equals(view.findViewById(tracker.getTrackerViewId()))) {
                         //TODO Configuration Changed may cause problem
                         Log.e(TAG, "onMovedToScrapHeap -> " + view.findViewById(R.id.view_tracker));
-//                        Tracker.detach(getActivity());
+                        Tracker.detach(getActivity());
                     }
                 }
             }
@@ -93,7 +94,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
                 .controller(new DefaultControllerView())
                 .visibleListener(this);
         }
-//        ((MainActivity) getActivity()).addDetailFragment();
+        ((MainActivity) getActivity()).addDetailFragment();
     }
 
 
