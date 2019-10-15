@@ -1,26 +1,23 @@
-package com.brucetoo.videoplayer.videomanage.controller;
+package com.nd.sdp.video.videomanager.controller;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.brucetoo.videoplayer.tracker.IViewTracker;
-import com.brucetoo.videoplayer.R;
-import com.brucetoo.videoplayer.tracker.Tracker;
-import com.brucetoo.videoplayer.videomanage.interfaces.PlayerItemChangeListener;
-import com.brucetoo.videoplayer.videomanage.interfaces.SimpleVideoPlayerListener;
-import com.brucetoo.videoplayer.videomanage.interfaces.VideoPlayerListener;
+import com.nd.sdp.video.tracker.IViewTracker;
+import com.nd.sdp.video.tracker.Tracker;
+import com.nd.sdp.video.videomanager.interfaces.PlayerItemChangeListener;
+import com.nd.sdp.video.videomanager.interfaces.SimpleVideoPlayerListener;
+import com.nd.sdp.video.videomanager.interfaces.VideoPlayerListener;
+
+import movie.andorid.sdp.nd.com.video_traker.R;
 
 /**
- * Created by Bruce Too
- * On 14/04/2017.
- * At 18:02
- * A RelativeLayout that can observe {@link com.brucetoo.videoplayer.videomanage.interfaces.VideoPlayerListener}
+ * @author JiaoYun
+ * @date 2019/10/15 11:08
  */
-
 public class VideoRelativeLayout extends RelativeLayout implements PlayerItemChangeListener {
-
     private View mPlayView;
     private View mTrackerView;
 

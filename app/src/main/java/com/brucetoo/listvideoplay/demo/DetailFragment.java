@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.brucetoo.listvideoplay.Backable;
 import com.brucetoo.listvideoplay.R;
-import com.brucetoo.videoplayer.tracker.Tracker;
+import com.nd.sdp.video.tracker.Tracker;
 
 /**
  * Created by Bruce Too
@@ -59,7 +59,7 @@ public class DetailFragment extends Fragment implements Backable {
     private float videoRootTransX;
     /**
      * Keep the old tracker view in case we rollback when dismiss {@link DetailFragment}
-     * NOTE: if the {@link DetailFragment} contains a new {@link com.brucetoo.videoplayer.scrolldetector.IScrollDetector}
+     * NOTE: if the {@link DetailFragment} contains a new {@link com.nd.sdp.video.scrolldetector.IScrollDetector}
      * we also need keep the old one, and rollback it when dismiss {@link DetailFragment}
      */
     private View oldTrackerView;

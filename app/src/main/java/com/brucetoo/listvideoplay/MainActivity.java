@@ -22,7 +22,7 @@ import com.brucetoo.listvideoplay.demo.PagerSupportFragment;
 import com.brucetoo.listvideoplay.demo.RecyclerViewFragment;
 import com.brucetoo.listvideoplay.demo.RecyclerViewSmallScreenFragment;
 import com.brucetoo.listvideoplay.demo.SpringAnimationFragment;
-import com.brucetoo.videoplayer.tracker.Tracker;
+import com.nd.sdp.video.tracker.Tracker;
 
 public class MainActivity extends AppCompatActivity {
 

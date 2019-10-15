@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "com.brucetoo.listvideoplay"
         minSdkVersion 16
@@ -20,21 +20,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':video-traker')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':video-traker')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.android.support:appcompat-v7:27.0.1'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 //    compile 'tv.danmaku.ijk.media:ijkplayer-java:0.7.5'
 //    compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.7.5'
-    compile 'com.joanzapata.android:base-adapter-helper:1.1.11'
-    compile 'com.android.support:support-v4:26.1.0'
-    compile 'com.android.support:support-annotations:26.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile "com.andkulikov:transitionseverywhere:1.7.8"
+    implementation 'com.joanzapata.android:base-adapter-helper:1.1.11'
+    implementation 'com.android.support:support-v4:27.0.1'
+    implementation 'com.android.support:support-annotations:27.0.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.andkulikov:transitionseverywhere:1.7.8"
 //    compile 'com.android.support:support-dynamic-animation:26.1.0'
-    compile 'com.github.markzhai:blockcanary-android:1.5.0'
-    testCompile 'junit:junit:4.12'
+    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
+    testImplementation 'junit:junit:4.12'
 }
