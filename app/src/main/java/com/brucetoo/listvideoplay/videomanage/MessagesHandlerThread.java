@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class MessagesHandlerThread {
 
-    private static final String TAG = MessagesHandlerThread.class.getSimpleName();
+    private static final String TAG = "&&&";
     private static final boolean SHOW_LOGS = Config.SHOW_LOGS;
 
     private final Queue<Message> mPlayerMessagesQueue = new ConcurrentLinkedQueue<>();

@@ -106,12 +106,7 @@ public class DefaultMediaPlayer implements IMediaPlayer,
     @Override
     public void prepare() {
         synchronized (mState) {
-            try {
-                mMediaPlayer.prepare();
-            } catch (Exception e) {
-                e.printStackTrace();
-                prepareAsync();
-            }
+            prepareAsync();
         }
     }
 

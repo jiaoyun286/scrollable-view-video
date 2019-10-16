@@ -174,8 +174,9 @@ public class ListViewFragment extends Fragment implements AbsListView.OnScrollLi
 
                 mVideoFloatContainer.setVisibility(View.INVISIBLE);
                 mCurrentPlayArea.setVisibility(View.VISIBLE);
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
+                if(getActivity() != null){
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
                 ViewAnimator.putOn(mVideoFloatContainer).translationY(0);
 
                 //stop update progress
@@ -367,8 +368,7 @@ public class ListViewFragment extends Fragment implements AbsListView.OnScrollLi
             mVideoPlayerView.setVisibility(View.INVISIBLE);
 
             //play video
-            mVideoPlayerManager.playNewVideo(new CurrentItemMetaData(model.position, v), mVideoPlayerView, "http://betacs.101.com/v0.1/download?path=%2Fqa_content_analysis_video_91up%2Fvideo%2Ftranscode%2F%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%9110%2F%E6%B5%8B%E8%AF%95%E8%A7%86%E9%A2%9110-1920x1080.mp4");
-
+            mVideoPlayerManager.playNewVideo(new CurrentItemMetaData(model.position, v), mVideoPlayerView, model.videoUrl);
         }
     }
 
