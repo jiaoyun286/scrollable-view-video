@@ -5,14 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.brucetoo.listvideoplay.DemoApplication"
+        android:name="com.nd.sdp.player.demo.DemoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.brucetoo.listvideoplay.MainActivity"
+            android:name="com.nd.sdp.player.demo.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -22,6 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.nd.sdp.player.demo.view.PagerSupportActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:configChanges="screenSize|keyboardHidden|orientation"/>
     </application>
 
 </manifest>

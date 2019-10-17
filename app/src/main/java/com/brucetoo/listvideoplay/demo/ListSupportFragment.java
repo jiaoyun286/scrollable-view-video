@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.brucetoo.listvideoplay.MainActivity;
 import com.joanzapata.android.BaseAdapterHelper;
 import com.joanzapata.android.QuickAdapter;
 import com.nd.sdp.bk.video.R;
@@ -93,7 +92,6 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
                 .controller(new DefaultControllerView())
                 .visibleListener(this);
         }
-//        ((MainActivity) getActivity()).addDetailFragment();
     }
 
 
@@ -101,7 +99,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
     public void onVisibleChange(float visibleRatio, IViewTracker tracker) {
         Log.e(TAG, "onVisibleChange : edge -> " + tracker.getEdgeString());
         if(!tracker.getFloatLayerView().getVideoPlayerView().isComplete()) {
-            if (visibleRatio <= 0.5) {
+            if (visibleRatio <= VISIBLE_THRESHOLD) {
                 tracker.hide();
             } else {
                 tracker.show();

@@ -70,10 +70,6 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
         mVideoPlayView = mFloatLayerView.getVideoPlayerView();
         mVideoPlayView.refreshSurfaceTexture(0, 0);
         mVideoPlayView.setAlpha(0f);
-//        View view = new View(getContext());
-//        view.setBackgroundColor(Color.parseColor("#dd000000"));
-//        //TODO Add immerse view when enable mask
-//        tracker.getFloatLayerView().addView(view,0);
         return tracker;
     }
 
@@ -168,12 +164,12 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
         IViewTracker tracker = super.trackView(trackView);
         Object data = tracker.getTrackerView().getTag(R.id.tag_tracker_view);
         if (data == null) {
-            throw new IllegalArgumentException("Tracker view need set tag by id:tag_tracker_view !");
+            throw new IllegalArgumentException("Tracker view 需要设置 id:tag_tracker_view !");
         }
         if(data instanceof MetaData){
             mMetaData = (MetaData) data;
         }else {
-            throw new IllegalArgumentException("Tracker view'tag should be instanceof MetaData!");
+            throw new IllegalArgumentException("Tracker view 中tag = tag_tracker_view 设置的数据的类型应该是  MetaData!");
         }
 
         addTrackerImageToVideoBottomView(trackView);
@@ -187,15 +183,15 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
                 //This callback may not be called
                 if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
                     mVideoPlayView.setVisibility(View.VISIBLE);
-                    //clear back ground
+                    //清除背景
                     mVideoBottomView.setBackgroundResource(0);
-                    //hide loading view
+                    //隐藏视频加载loading
                     addOrRemoveLoadingView(false);
                 } else if (what == MediaPlayer.MEDIA_INFO_BUFFERING_START) {
-                    //show loading view
+                    //播放过程中缓冲
                     addOrRemoveLoadingView(true);
                 } else if (what == MediaPlayer.MEDIA_INFO_BUFFERING_END) {
-                    //hide loading view
+                    //缓冲完成会回调
                     addOrRemoveLoadingView(false);
                 }
             }
@@ -214,7 +210,7 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
             public void onVideoReleased(IViewTracker viewTracker) {
                 super.onVideoReleased(viewTracker);
                 Tracker.removeVideoPlayerListener(this);
-        }
+            }
 
             @Override
             public void onVideoPrepared(IViewTracker viewTracker) {
@@ -254,10 +250,9 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
     }
 
     /**
-     * Prevent the abrupt black screen in {@link #mFloatLayerView},and set tracker view's
-     * background into {@link #mFloatLayerView} to make a better visual connection
+     * 将track view的背景图添加到floutview，以防止视频画面显示前的黑屏，使UI变化平滑，提高用户体验
      *
-     * @param trackView the view be tracked
+     * @param trackView
      */
     private void addTrackerImageToVideoBottomView(View trackView) {
         boolean containsKey = mCachedDrawables.containsKey(mMetaData);

@@ -1,4 +1,4 @@
-package com.brucetoo.listvideoplay;
+package com.nd.sdp.player.demo;
 
 import android.app.Application;
 

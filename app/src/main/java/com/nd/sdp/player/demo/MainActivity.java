@@ -1,86 +1,33 @@
-package com.brucetoo.listvideoplay;
+package com.nd.sdp.player.demo;
 
-import android.animation.AnimatorSet;
-import android.animation.ValueAnimator;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 
+import com.brucetoo.listvideoplay.Backable;
 import com.brucetoo.listvideoplay.demo.ConstraintFragment;
 import com.brucetoo.listvideoplay.demo.DetailFragment;
 import com.brucetoo.listvideoplay.demo.ListViewFragment;
-import com.brucetoo.listvideoplay.demo.ListViewMaskFragment;
 import com.brucetoo.listvideoplay.demo.ListViewSmallScreenFragment;
 import com.brucetoo.listvideoplay.demo.PagerSupportFragment;
 import com.brucetoo.listvideoplay.demo.RecyclerViewFragment;
 import com.brucetoo.listvideoplay.demo.RecyclerViewSmallScreenFragment;
-import com.brucetoo.listvideoplay.demo.SpringAnimationFragment;
 import com.brucetoo.listvideoplay.demo.TrackerSupportFragment;
 import com.nd.sdp.bk.video.R;
+import com.nd.sdp.player.demo.view.PagerSupportActivity;
 import com.nd.sdp.video.tracker.Tracker;
 
 public class MainActivity extends AppCompatActivity {
 
-    Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        final ClipDrawable drawable = (ClipDrawable) (findViewById(R.id.clip_image)).getBackground();
-//        drawable.setLevel(0);
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                drawable.setLevel(drawable.getLevel() + 50);
-//                handler.postDelayed(this, 500);
-//            }
-//        }, 500);
-
-        final GradientDrawable gd = new GradientDrawable();
-        gd.setColor(getResources().getColor(R.color.colorAccent));
-        final float max = getResources().getDimension(R.dimen.dimen_max);
-        float min = getResources().getDimension(R.dimen.dimen_min);
-        float dp1 = getResources().getDimension(R.dimen.dimen_1);
-        gd.setShape(GradientDrawable.RECTANGLE);
-        gd.setCornerRadius(min);
-        final ImageView view = (ImageView) findViewById(R.id.clip_image);
-        view.setImageDrawable(gd);
-
-        ValueAnimator radius = ValueAnimator.ofFloat(min, max);
-        radius.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                gd.setCornerRadius(value);
-            }
-        });
-        radius.setRepeatMode(ValueAnimator.REVERSE);
-        radius.setRepeatCount(ValueAnimator.INFINITE);
-
-        ValueAnimator width = ValueAnimator.ofFloat(100 * dp1, 60 * dp1);
-        width.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                view.getLayoutParams().width = (int) value;
-                view.requestLayout();
-            }
-        });
-        width.setRepeatMode(ValueAnimator.REVERSE);
-        width.setRepeatCount(ValueAnimator.INFINITE);
-
-        AnimatorSet set = new AnimatorSet();
-        set.setDuration(2000);
-        set.playTogether(width, radius);
-        set.start();
     }
 
 
@@ -117,35 +64,16 @@ public class MainActivity extends AppCompatActivity {
             .commit();
     }
 
-    public void onHighLightClick(View view) {
-        getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.layout_container, new ListViewMaskFragment(), "ListViewMaskFragment")
-            .addToBackStack(null)
-            .commit();
-    }
-
-    public void onSpringAnimation(View view) {
-        getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.layout_container, new SpringAnimationFragment(), "SpringAnimationFragment")
-            .addToBackStack(null)
-            .commit();
-    }
 
     public void onVideoSupport(View view) {
-        getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.layout_container, new PagerSupportFragment(), "PagerSupportFragment")
-            .addToBackStack("PagerSupportFragment")
-            .commit();
+        PagerSupportActivity.start(this);
     }
 
     public void onTrackerSupport(View view){
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.layout_container, new TrackerSupportFragment(), "TrackerSupportFragment")
-                .addToBackStack(null)
+                .add(R.id.layout_container, new TrackerSupportFragment(), "TrackerSupportFragment")
+                .addToBackStack("TrackerSupportFragment")
                 .commit();
     }
 

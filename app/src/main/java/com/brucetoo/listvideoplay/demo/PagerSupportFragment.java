@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.brucetoo.listvideoplay.Backable;
 import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.tracker.Tracker;
 
@@ -19,7 +18,7 @@ import com.nd.sdp.video.tracker.Tracker;
  * At 14:37
  */
 
-public class PagerSupportFragment extends Fragment implements Backable{
+public class PagerSupportFragment extends Fragment{
 
     ViewPager mViewPager;
     private int mCurrentIndex;
@@ -68,14 +67,4 @@ public class PagerSupportFragment extends Fragment implements Backable{
         });
     }
 
-    @Override
-    public boolean onBackPressed() {
-        boolean attach = Tracker.isAttach(getActivity());
-        if(attach){
-            Tracker.destroy(getActivity());
-            return true;
-        }else {
-            return false;
-        }
-    }
 }

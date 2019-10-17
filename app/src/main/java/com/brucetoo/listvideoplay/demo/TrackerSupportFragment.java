@@ -13,7 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.brucetoo.listvideoplay.MainActivity;
+import com.brucetoo.listvideoplay.Backable;
+import com.nd.sdp.player.demo.MainActivity;
 import com.bumptech.glide.Glide;
 import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.scrolldetector.RecyclerScrollDetector;
@@ -32,7 +33,7 @@ import java.lang.ref.WeakReference;
  * @author JiaoYun
  * @date 2019/10/15 19:06
  */
-public class TrackerSupportFragment extends Fragment implements View.OnClickListener, VisibleChangeListener, PlayerItemChangeListener, VideoPlayerListener {
+public class TrackerSupportFragment extends Fragment implements View.OnClickListener, VisibleChangeListener, PlayerItemChangeListener, VideoPlayerListener, Backable {
     private static final String TAG = TrackerSupportFragment.class.getSimpleName();
     private RecyclerView mRecyclerView;
     private static final float VISIBLE_THRESHOLD = 0.5f;
@@ -138,6 +139,19 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
     @Override
     public void onVideoReleased(IViewTracker viewTracker) {
 
+    }
+
+    @Override
+    public boolean onBackPressed() {
+
+        if (getActivity() != null){
+            if(Tracker.isAttach(getActivity())){
+                Tracker.destroy(getActivity());
+            }
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+
+        return true;
     }
 
 
