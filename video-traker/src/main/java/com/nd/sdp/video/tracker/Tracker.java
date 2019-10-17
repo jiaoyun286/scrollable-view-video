@@ -91,7 +91,7 @@ public class Tracker {
     public static boolean isSameTrackerView(Activity context, View newTracker){
         IViewTracker iViewTracker = mViewTrackers.get(context);
         if(iViewTracker != null && iViewTracker.getTrackerView() != null){
-            return iViewTracker.getTrackerView().equals(newTracker);
+            return iViewTracker.getTrackerView().equals(newTracker) && iViewTracker.isAttach();
         }
         return false;
     }

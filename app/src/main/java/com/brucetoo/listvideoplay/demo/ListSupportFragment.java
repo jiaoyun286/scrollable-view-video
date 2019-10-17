@@ -86,7 +86,6 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-        Log.e(TAG, "onMovedToScrapHeap onClick -> " + v);
         if(!Tracker.isSameTrackerView(getActivity(),v)) {
             Tracker.attach(getActivity())
                 .trackView(v)
@@ -94,7 +93,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
                 .controller(new DefaultControllerView())
                 .visibleListener(this);
         }
-        ((MainActivity) getActivity()).addDetailFragment();
+//        ((MainActivity) getActivity()).addDetailFragment();
     }
 
 
@@ -127,7 +126,8 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onVideoCompletion(IViewTracker viewTracker) {
-        Log.e(TAG, "onVideoCompletion");
+        //播放结束，将视频播放相关的视图FollowView从DecorView移除
+        viewTracker.detach();
     }
 
     @Override

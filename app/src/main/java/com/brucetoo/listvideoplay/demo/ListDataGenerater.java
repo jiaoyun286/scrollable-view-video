@@ -28,7 +28,7 @@ public class ListDataGenerater {
         m3.videoUrl = "https://media.w3.org/2010/05/sintel/trailer.mp4";
 
         VideoModel m4 = new VideoModel();
-        m4.coverImage = "https://s2.ax1x.com/2019/10/15/KCMNiF.png";
+        m4.coverImage = "https://s2.ax1x.com/2019/10/17/Kk5u11.md.png";
         m4.videoUrl = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
 
         VideoModel m5 = new VideoModel();
