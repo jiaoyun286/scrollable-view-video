@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.Surface;
 
 import com.nd.sdp.video.tracker.IViewTracker;
@@ -58,9 +59,7 @@ public class DefaultMediaPlayer implements IMediaPlayer,
         mMediaPlayer.setScreenOnWhilePlaying(true);
     }
 
-    /**
-     * Main thread message!!!
-     */
+
     private final Runnable mOnVideoPreparedMessage = new Runnable() {
         @Override
         public void run() {
@@ -92,6 +91,7 @@ public class DefaultMediaPlayer implements IMediaPlayer,
     private final Runnable mOnVideoResetMessage = new Runnable() {
         @Override
         public void run() {
+            Log.d("@@@","--------------5");
             mListener.onVideoReset(mViewTracker);
         }
     };
@@ -99,6 +99,7 @@ public class DefaultMediaPlayer implements IMediaPlayer,
     private final Runnable mOnVideoReleaseMessage = new Runnable() {
         @Override
         public void run() {
+            Log.d("@@@","--------------6");
             mListener.onVideoReleased(mViewTracker);
         }
     };

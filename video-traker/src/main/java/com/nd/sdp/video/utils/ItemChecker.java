@@ -4,7 +4,7 @@ import android.graphics.Rect;
 import android.support.annotation.IdRes;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
+import android.view.ViewGroup;
 
 import com.nd.sdp.video.tracker.IViewTracker;
 
@@ -17,11 +17,11 @@ public class ItemChecker {
 
     /**
      * 获取下一个完全可见的TrackView
-     * 获取策略根据followView位移时触边方向确定，顶部触边，则从上向下第一个完全可见item为TrackView，
-     * 底部触边，则从下向上第一个完全可见item未TrackView
-     * @param listView current listView
+     * 获取策略根据followView位移时触边方向确定，顶部触边，则从上向下第一个完全可见item为下个TrackView，
+     * 底部触边，则从下向上第一个完全可见item为下个TrackView
+     * @param listView
      */
-    public static View getNextTrackerView(ListView listView, IViewTracker tracker) {
+    public static View getNextTrackerView(ViewGroup listView, IViewTracker tracker) {
 
         if (listView == null) {
             return null;
@@ -43,7 +43,6 @@ public class ItemChecker {
                     if (container == null) {
                         continue;
                     }
-                    //only care about cover rect, not itemView
                     Rect rect = new Rect();
                     container.getLocalVisibleRect(rect);
                     Log.e(TAG, "getNextTrackerView Bottom: item = " + i
@@ -65,7 +64,6 @@ public class ItemChecker {
                     if (container == null) {
                         continue;
                     }
-                    //only care about cover rect, not itemView
                     Rect rect = new Rect();
                     container.getLocalVisibleRect(rect);
                     Log.e(TAG, "getNextTrackerView Bottom: item = " + i
@@ -82,13 +80,13 @@ public class ItemChecker {
     }
 
     /**
-     * 获取ListView中无安全可见的item的高度
+     * 获取ListView中完全可见的item的高度
      *
-     * @param listView current listView
+     * @param listView
      * @param coverId
      * @return item view
      */
-    public static View getRelativeMostVisibleItemView(ListView listView, @IdRes int coverId) {
+    public static View getRelativeMostVisibleItemView(ViewGroup listView, @IdRes int coverId) {
         if (listView == null) {
             return null;
         }
@@ -104,7 +102,6 @@ public class ItemChecker {
             if (container == null) {
                 continue;
             }
-            //only care about cover rect, not itemView
             Rect rect = new Rect();
             container.getLocalVisibleRect(rect);
             if (rect.bottom >= 0 && rect.left == 0 && rect.top == 0) {

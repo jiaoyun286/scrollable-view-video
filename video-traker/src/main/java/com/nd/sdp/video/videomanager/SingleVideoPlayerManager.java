@@ -62,7 +62,7 @@ public class SingleVideoPlayerManager implements VideoPlayerManager<IViewTracker
      * Start play a new video in a new {@link VideoPlayerView}
      * 1. Stop queue processing to have consistent state of queue when posting new messages
      * 2. Remove all listener and message in queue(destroy the current player)
-     * 3. Create a new {@link IMediaPlayer} for new {@link VideoPlayerView},add start prepare to play
+     * 3. Create a new {@link com.nd.sdp.video.videomanager.interfaces.IMediaPlayer} for new {@link VideoPlayerView},add start prepare to play
      * 5. Resume stopped queue
      *
      * @param viewTracker     current item bounded IViewTracker

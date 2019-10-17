@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.brucetoo.videoplayer.utils.Reflecter;
 import com.nd.sdp.video.tracker.IViewTracker;
 import com.nd.sdp.video.utils.ItemChecker;
+import com.nd.sdp.video.utils.Reflecter;
 
 /**
  * @author JiaoYun
