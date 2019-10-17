@@ -71,7 +71,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
                 IViewTracker tracker = Tracker.getViewTracker(getActivity());
                 if(tracker != null) {
                     View trackerView = tracker.getTrackerView();
-                    if (trackerView != null && trackerView.equals(view.findViewById(tracker.getTrackerViewId()))) {
+                    if (!tracker.isFullScreen() && trackerView != null && trackerView.equals(view.findViewById(tracker.getTrackerViewId()))) {
                         //TODO Configuration Changed may cause problem
                         Log.e(TAG, "onMovedToScrapHeap -> " + view.findViewById(R.id.view_tracker));
                         Tracker.detach(getActivity());

@@ -65,7 +65,7 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
                     .controller(new DefaultControllerView())
                     .visibleListener(this);
         }
-        ((MainActivity) getActivity()).addDetailFragment();
+//        ((MainActivity) getActivity()).addDetailFragment();
 
     }
 
@@ -182,7 +182,7 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
             Context context = holder.coverImage.getContext();
             if(context instanceof Activity){
                 IViewTracker tracker = Tracker.getViewTracker((Activity) context);
-                if(tracker != null){
+                if(tracker != null && !tracker.isFullScreen()){
                     View trackerView = tracker.getTrackerView();
                     if (trackerView != null && trackerView.equals(holder.coverImage.findViewById(tracker.getTrackerViewId()))) {
                         //TODO Configuration Changed may cause problem

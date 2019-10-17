@@ -2,10 +2,12 @@ package com.nd.sdp.player.demo.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.brucetoo.listvideoplay.demo.ListSupportFragment;
 import com.brucetoo.listvideoplay.demo.PagerSupportFragment;
 import com.nd.sdp.bk.video.R;
 import com.nd.sdp.video.tracker.Tracker;
@@ -25,7 +27,7 @@ public class PagerSupportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contain);
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.root, new PagerSupportFragment(), "PagerSupportFragment")
+                .add(R.id.root, new ListSupportFragment(), "PagerSupportFragment")
                 .commit();
     }
 
@@ -36,5 +38,11 @@ public class PagerSupportActivity extends AppCompatActivity {
         if(attach){
             Tracker.destroy(this);
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Tracker.onConfigurationChanged(this, newConfig);
     }
 }
