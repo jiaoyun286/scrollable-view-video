@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -177,7 +178,7 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
 
         addTrackerImageToVideoBottomView(trackView);
 
-        Tracker.playNewVideo(this, mVideoPlayView);
+
         Tracker.addPlayerItemChangeListener(this);
 
         Tracker.addVideoPlayerListener(new SimpleVideoPlayerListener() {
@@ -210,6 +211,12 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
             }
 
             @Override
+            public void onVideoReleased(IViewTracker viewTracker) {
+                super.onVideoReleased(viewTracker);
+                Tracker.removeVideoPlayerListener(this);
+        }
+
+            @Override
             public void onVideoPrepared(IViewTracker viewTracker) {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     mVideoPlayView.setVisibility(View.VISIBLE);
@@ -223,6 +230,7 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
                 }
             }
         });
+        Tracker.playNewVideo(this, mVideoPlayView);
 
         return tracker;
     }
