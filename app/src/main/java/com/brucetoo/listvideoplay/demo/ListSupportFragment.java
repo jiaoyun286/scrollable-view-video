@@ -3,11 +3,9 @@ package com.brucetoo.listvideoplay.demo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +17,7 @@ import com.nd.sdp.video.scrolldetector.ListScrollDetector;
 import com.nd.sdp.video.tracker.IViewTracker;
 import com.nd.sdp.video.tracker.Tracker;
 import com.nd.sdp.video.tracker.VisibleChangeListener;
+import com.nd.sdp.video.utils.Logger;
 import com.nd.sdp.video.videomanager.controller.DefaultControllerView;
 import com.nd.sdp.video.videomanager.interfaces.PlayerItemChangeListener;
 import com.nd.sdp.video.videomanager.interfaces.VideoPlayerListener;
@@ -58,27 +57,12 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
                     .load(item.coverImage)
                     .into(imageCover);
                 imageCover.setRatio(16,9);
-                //bind meta data
+                //绑定数据到track view
                 imageCover.setTag(R.id.tag_tracker_view,new DefaultMetaData(item.videoUrl));
                 imageCover.setOnClickListener(ListSupportFragment.this);
             }
         };
         mListView.setAdapter(adapter);
-        mListView.setRecyclerListener(new AbsListView.RecyclerListener() {
-            @Override
-            public void onMovedToScrapHeap(View view) {
-                //the tracker view is moved to scrap,and be re-used,so we need detach view in decor
-                IViewTracker tracker = Tracker.getViewTracker(getActivity());
-                if(tracker != null) {
-                    View trackerView = tracker.getTrackerView();
-                    if (!tracker.isFullScreen() && trackerView != null && trackerView.equals(view.findViewById(tracker.getTrackerViewId()))) {
-                        //TODO Configuration Changed may cause problem
-                        Log.e(TAG, "onMovedToScrapHeap -> " + view.findViewById(R.id.view_tracker));
-                        Tracker.detach(getActivity());
-                    }
-                }
-            }
-        });
         Tracker.addPlayerItemChangeListener(this);
         Tracker.addVideoPlayerListener(this);
     }
@@ -97,7 +81,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onVisibleChange(float visibleRatio, IViewTracker tracker) {
-        Log.e(TAG, "onVisibleChange : edge -> " + tracker.getEdgeString());
+        Logger.e(TAG, "onVisibleChange : edge -> " + tracker.getEdgeString());
         if(!tracker.getFloatLayerView().getVideoPlayerView().isComplete()) {
             if (visibleRatio <= VISIBLE_THRESHOLD) {
                 tracker.hide();
@@ -109,28 +93,32 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onPlayerItemChanged(IViewTracker viewTracker) {
-        Log.i(TAG, "onPlayerItemChanged ");
+        Logger.i(TAG, "onPlayerItemChanged ");
     }
 
     @Override
     public void onVideoSizeChanged(IViewTracker viewTracker, int width, int height) {
-        Log.e(TAG, "onVideoSizeChanged");
+        Logger.e(TAG, "onVideoSizeChanged");
     }
 
     @Override
     public void onVideoPrepared(IViewTracker viewTracker) {
-        Log.e(TAG, "onVideoPrepared");
+        Logger.e(TAG, "onVideoPrepared");
     }
 
     @Override
     public void onVideoCompletion(IViewTracker viewTracker) {
+        //全屏播放，先切回竖屏
+        if(viewTracker.isFullScreen()){
+            viewTracker.toNormalScreen();
+        }
         //播放结束，将视频播放相关的视图FollowView从DecorView移除
         viewTracker.detach();
     }
 
     @Override
     public void onError(IViewTracker viewTracker, int what, int extra) {
-        Log.e(TAG, "onError");
+        Logger.e(TAG, "onError");
     }
 
     @Override
@@ -140,7 +128,7 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onVideoStopped(IViewTracker viewTracker) {
-        Log.e(TAG, "onVideoStopped");
+        Logger.e(TAG, "onVideoStopped");
     }
 
     @Override
@@ -155,16 +143,16 @@ public class ListSupportFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onInfo(IViewTracker viewTracker, int what) {
-        Log.e(TAG, "onInfo");
+        Logger.e(TAG, "onInfo");
     }
 
     @Override
     public void onVideoStarted(IViewTracker viewTracker) {
-        Log.e(TAG, "onVideoStarted");
+        Logger.e(TAG, "onVideoStarted");
     }
 
     @Override
     public void onVideoPaused(IViewTracker viewTracker) {
-        Log.e(TAG, "onVideoPaused");
+        Logger.e(TAG, "onVideoPaused");
     }
 }
