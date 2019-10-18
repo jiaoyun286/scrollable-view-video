@@ -164,6 +164,7 @@ public class SingleVideoPlayerManager implements VideoPlayerManager<IViewTracker
         switch (mCurrentPlayerState) {
             case STARTING:
             case STARTED:
+            case PREPARED:
             case PAUSING:
             case PAUSED:
                 mPlayerHandler.addMessage(new Pause(mCurrentPlayer, this));
