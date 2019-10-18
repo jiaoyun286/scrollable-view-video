@@ -61,7 +61,6 @@ public class ListScrollDetector implements AbsListView.OnScrollListener,IScrollD
 
     @Override
     public void onScrollStateChanged(AbsListView absListView, int i) {
-        //wrap origin listener
         if (mOriginListener != null) {
             mOriginListener.onScrollStateChanged(absListView, i);
         }
@@ -83,7 +82,6 @@ public class ListScrollDetector implements AbsListView.OnScrollListener,IScrollD
 
     @Override
     public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-        //wrap origin listener
         if (mOriginListener != null) {
             mOriginListener.onScroll(absListView, i, i1, i2);
         }

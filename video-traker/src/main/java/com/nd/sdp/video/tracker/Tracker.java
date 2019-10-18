@@ -136,7 +136,7 @@ public class Tracker {
     }
 
     /**
-     * Add global {@link VideoPlayerListener} call this before {@link #playNewVideo(IViewTracker, VideoPlayerView, String)}
+     * Add global {@link VideoPlayerListener} call this before {@link #playNewVideo(IViewTracker, VideoPlayerView)}}
      * if {@link PlayerItemChangeListener} happened, it's useless to call this,instead can use new {@link VideoPlayerView}
      * to control video player.
      * @param videoPlayerListener VideoPlayerListener
@@ -154,6 +154,7 @@ public class Tracker {
     }
 
     /**
+     * 开始一个 pause/stop状态的视频
      * Start a pause/stop video
      */
     public static void startVideo(){
@@ -161,7 +162,7 @@ public class Tracker {
     }
 
     /**
-     * Pause a prepared/stared video
+     * 暂停 prepared/stared状态的视频
      */
     public static void pauseVideo(){
         SingleVideoPlayerManager.getInstance().pauseVideo();

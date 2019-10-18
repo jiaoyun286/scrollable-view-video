@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -292,7 +293,6 @@ public class ViewTracker implements IViewTracker, ViewTreeObserver.OnScrollChang
 
     @Override
     public IViewTracker changeTrackView(View trackView) {
-        //clear old track new
         this.mTrackView.getViewTreeObserver().removeOnScrollChangedListener(this);
         this.mTrackView = trackView;
         int id = mTrackView.getId();
@@ -363,7 +363,6 @@ public class ViewTracker implements IViewTracker, ViewTreeObserver.OnScrollChang
 //        if (mFloatLayerView != null && Config.SHOW_DEBUG_RECT) {// for test
 //            mFloatLayerView.testView.setText(getCalculateValueByString(mTrackView));
 //        }
-        //only move follower view in portrait screen
         if (!isFullScreen()) {
             moveCurrentView(mVerticalScrollView, mFollowerView, mTrackView);
         }
@@ -439,8 +438,7 @@ public class ViewTracker implements IViewTracker, ViewTreeObserver.OnScrollChang
 
         if (toViewR.top != 0 || toViewR.bottom != toView.getHeight()
                 || toViewR.left != 0 || toViewR.right != toView.getWidth()) { //被追踪的视图正在被滚出屏幕，即部分可见
-            //move self
-            Logger.v(TAG, "moveCurrentView: move self");
+            Logger.v(TAG, "moveCurrentView: move fromView");
             float moveX = 0;
             float moveY = 0;
 
@@ -490,8 +488,6 @@ public class ViewTracker implements IViewTracker, ViewTreeObserver.OnScrollChang
                 mCurrentEdge = RIGHT_EDGE;
             }
 
-            //TODO mCurrentEdge is not accurate,fix it!
-
             //移动视频播放视图容器
             ViewAnimator.putOn(fromView).translation(moveX, moveY);
 
@@ -500,11 +496,12 @@ public class ViewTracker implements IViewTracker, ViewTreeObserver.OnScrollChang
                 float v1 = (toViewR.bottom - toViewR.top) * 1.0f / toView.getHeight();
                 float v2 = (toViewR.right - toViewR.left) * 1.0f / toView.getWidth();
                 if (mVisibleChangeListener != null) {
-                    mVisibleChangeListener.onVisibleChange(v1 == 1 ? v2 : v1, this);
+                    //竖直方向传高度变化，水平方向传宽度变化
+                    mVisibleChangeListener.onVisibleChange(mCurrentEdge == TOP_EDGE || mCurrentEdge == BOTTOM_EDGE ? v1 : v2, this);
                 }
             }
         } else {
-            Logger.v(TAG, "moveCurrentView: move parent");
+            Logger.v(TAG, "moveCurrentView: move fromView 的 parent");
             //移动跟视图
             ViewAnimator.putOn(parent).translation(locTo[0], locTo[1])
                     .andPutOn(fromView).translation(0, 0);

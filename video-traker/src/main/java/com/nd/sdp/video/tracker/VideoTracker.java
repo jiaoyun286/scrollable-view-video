@@ -8,7 +8,6 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.util.SimpleArrayMap;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -119,7 +118,6 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
     }
 
     private void handleControllerView(IControllerView controllerView) {
-        //remove previous controller view first
         if(mLoadingControllerView != null && mLoadingControllerView.getParent() != null){
             ((ViewGroup) mLoadingControllerView.getParent()).removeView(mLoadingControllerView);
         }
@@ -132,9 +130,19 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
             ((ViewGroup) mFullScreenControllerView.getParent()).removeView(mFullScreenControllerView);
         }
 
-        mLoadingControllerView = controllerView.loadingController(this);
-        mNormalScreenControllerView = (BaseControllerView) controllerView.normalScreenController(this);
-        mFullScreenControllerView = (BaseControllerView) controllerView.fullScreenController(this);
+
+        if(mLoadingControllerView == null){
+            mLoadingControllerView = controllerView.loadingController(this);
+        }
+
+        if(mNormalScreenControllerView == null){
+            mNormalScreenControllerView = (BaseControllerView) controllerView.normalScreenController(this);
+        }
+
+        if(mFullScreenControllerView == null){
+            mFullScreenControllerView = (BaseControllerView) controllerView.fullScreenController(this);
+        }
+
     }
 
     @Override
@@ -180,7 +188,7 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
         Tracker.addVideoPlayerListener(new SimpleVideoPlayerListener() {
             @Override
             public void onInfo(IViewTracker viewTracker, int what) {
-                //This callback may not be called
+                //这个回调可能不被调用
                 if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
                     mVideoPlayView.setVisibility(View.VISIBLE);
                     //清除背景
@@ -198,8 +206,8 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
 
             @Override
             public void onBufferingUpdate(IViewTracker viewTracker, int percent) {
-                //TODO some times, onInfo not be called
-                if(percent > 50){
+                //预防onInfo有时未回调，导致视频未显示出来的问题
+                if( percent > 10){
                     mVideoPlayView.setVisibility(View.VISIBLE);
                     addOrRemoveLoadingView(false);
                     mVideoBottomView.setBackgroundResource(0);
@@ -244,7 +252,6 @@ public class VideoTracker extends ViewTracker implements PlayerItemChangeListene
 
     @Override
     public void done(Object key, BitmapDrawable drawable) {
-        Logger.i(TAG, "mDrawableTask done, addKey : " + key);
         mCachedDrawables.put(key, drawable);
         mVideoBottomView.setBackgroundDrawable(drawable);
     }

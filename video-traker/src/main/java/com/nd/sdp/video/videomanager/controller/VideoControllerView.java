@@ -234,10 +234,10 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
                     Log.e(TAG, "handleMessage: HANDLER_ANIMATE_OUT" );
                     view.hide();
                     break;
-                case HANDLER_UPDATE_PROGRESS://cycle update seek bar progress
+                case HANDLER_UPDATE_PROGRESS:
                     pos = view.setSeekProgress();
                     if (!view.mIsDragging && view.mIsShowing && view.mMediaPlayerControlListener.isPlaying()) {//just in case
-                        //cycle update
+
                         msg = obtainMessage(HANDLER_UPDATE_PROGRESS);
                         sendMessageDelayed(msg, 1000 - (pos % 1000));
                     }
@@ -246,11 +246,7 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
         }
     }
 
-    /**
-     * Inflate view from exit xml layout
-     *
-     * @return the root view of {@link VideoControllerView}
-     */
+
     private View makeControllerView() {
         LayoutInflater inflate = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mRootView = inflate.inflate(R.layout.layout_media_controller, null);
@@ -335,26 +331,6 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
 
             mIsShowing = true;
             mHandler.sendEmptyMessage(HANDLER_UPDATE_PROGRESS);
-            //don't need animate
-//            ViewAnimator.putOn(mTopLayout)
-//                    .waitForSize(new ViewAnimator.Listeners.Size() {
-//                        @Override
-//                        public void onSize(ViewAnimator viewAnimator) {
-//                            viewAnimator.animate()
-//                                    .translationY(-mTopLayout.getHeight(), 0)
-//                                    .duration(ANIMATE_TIME)
-//                                    .andAnimate(mBottomLayout)
-//                                    .translationY(mBottomLayout.getHeight(), 0)
-//                                    .duration(ANIMATE_TIME)
-//                                    .start(new ViewAnimator.Listeners.Start() {
-//                                        @Override
-//                                        public void onStart() {
-//                                            mIsShowing = true;
-//                                            mHandler.sendEmptyMessage(HANDLER_UPDATE_PROGRESS);
-//                                        }
-//                                    });
-//                        }
-//                    });
         }
 
         setSeekProgress();
@@ -416,18 +392,13 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
     }
 
 
-    /**
-     * if {@link VideoControllerView} is visible
-     *
-     * @return showing or not
-     */
+
     public boolean isShowing() {
         return mIsShowing;
     }
 
     /**
-     * hide controller view with animation
-     * With custom animation
+     * 隐藏 controller view
      */
     public void hide() {
         if (mAnchorView == null) {
@@ -437,31 +408,9 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
         mAnchorView.removeView(VideoControllerView.this);
         mHandler.removeMessages(HANDLER_UPDATE_PROGRESS);
         mIsShowing = false;
-        //don't need animate
-//        ViewAnimator.putOn(mTopLayout)
-//                .animate()
-//                .translationY(-mTopLayout.getHeight())
-//                .duration(ANIMATE_TIME)
-//
-//                .andAnimate(mBottomLayout)
-//                .translationY(mBottomLayout.getHeight())
-//                .duration(ANIMATE_TIME)
-//                .end(new ViewAnimator.Listeners.End() {
-//                    @Override
-//                    public void onEnd() {
-//                        mAnchorView.removeView(VideoControllerView.this);
-//                        mHandler.removeMessages(HANDLER_UPDATE_PROGRESS);
-//                        mIsShowing = false;
-//                    }
-//                });
     }
 
-    /**
-     * convert string to time
-     *
-     * @param timeMs time to be formatted
-     * @return 00:00:00
-     */
+
     private String stringToTime(int timeMs) {
         int totalSeconds = timeMs / 1000;
 
@@ -478,10 +427,9 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
     }
 
     /**
-     * set {@link #mSeekBar} progress
-     * and video play time {@link #mCurrentTime}
+     * 依据video播放进度设置seekbar的进度
      *
-     * @return current play position
+     * @return 当前播放位置
      */
     private int setSeekProgress() {
         if (mMediaPlayerControlListener == null || mIsDragging) {
@@ -492,13 +440,12 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
         int duration = mMediaPlayerControlListener.getDuration();
         if (mSeekBar != null) {
             if (duration > 0) {
-                // use long to avoid overflow
                 long pos = 1000L * position / duration;
                 mSeekBar.setProgress((int) pos);
             }
-            //get buffer percentage
+            //获取缓冲百分百
             int percent = mMediaPlayerControlListener.getBufferPercentage();
-            //set buffer progress
+            //设置缓冲进度
             mSeekBar.setSecondaryProgress(percent * 10);
         }
 
@@ -529,19 +476,16 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
                 mCurBrightness = -1;
                 mCenterLayout.setVisibility(GONE);
                 mPauseButton.setVisibility(VISIBLE);
-//                break;// do need bread,should let gestureDetector to handle event
-            default://gestureDetector handle other MotionEvent
+            default:
                 if(mGestureDetector != null)
                     mGestureDetector.onTouchEvent(event);
         }
-
-        //ListView need handle touchEvent,so portrait screen need return false
         return mMediaPlayerControlListener.isFullScreen();
 
     }
 
     /**
-     * toggle pause or play
+     * 切换播放/暂停
      */
     private void togglePausePlay() {
         if (mRootView == null || mPauseButton == null || mMediaPlayerControlListener == null) {
@@ -556,7 +500,7 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
     }
 
     /**
-     * toggle full screen or not
+     * 切换屏幕方向
      */
     public void toggleFullScreen() {
         if (mRootView == null || mFullscreenButton == null || mMediaPlayerControlListener == null) {
@@ -592,7 +536,7 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
     }
 
     /**
-     * Seek bar drag listener
+     * seekbar进度变化监听
      */
     private SeekBar.OnSeekBarChangeListener mSeekListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
@@ -648,7 +592,7 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
 
 
     /**
-     * set top back click listener
+     * 顶部返回按钮点击事件监听
      */
     private View.OnClickListener mBackListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -658,7 +602,7 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
 
 
     /**
-     * set pause click listener
+     * 暂停/播放按钮点击事件监听
      */
     private View.OnClickListener mPauseListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -668,7 +612,7 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
     };
 
     /**
-     * set full screen click listener
+     * 全屏按钮点击事件监听
      */
     private View.OnClickListener mFullscreenListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -860,71 +804,69 @@ public class VideoControllerView extends FrameLayout implements VideoGestureList
      */
     public interface MediaPlayerControlListener {
         /**
-         * start play video
+         * 开始播放
          */
         void start();
 
         /**
-         * pause video
+         * 暂停播放
          */
         void pause();
 
         /**
-         * get video total time
+         * 获取视频时长
          *
-         * @return total time
+         * @return 视频资源的总时长
          */
         int getDuration();
 
         /**
-         * get video current position
+         * 获取当前播放进度
          *
-         * @return current position
+         * @return 播放进度的毫秒值
          */
         int getCurrentPosition();
 
         /**
-         * seek video to exactly position
+         * 跳到指定进度位置播放
          *
-         * @param position position
+         * @param position
          */
         void seekTo(int position);
 
         /**
-         * video is playing state
+         * 判断视频是否是播放状态
          *
-         * @return is video playing
+         * @return
          */
         boolean isPlaying();
 
         /**
-         * video is complete
-         * @return complete or not
+         * 视频是否播放结束
+         * @return
          */
         boolean isComplete();
 
         /**
-         * get buffer percent
+         * 获取缓冲进度的百分比
          *
-         * @return percent
+         * @return
          */
         int getBufferPercentage();
 
         /**
-         * video is full screen
-         * in order to control image src...
-         *
-         * @return fullScreen
+         * 播放器是否是否全屏
+         * @return 是否全屏
          */
         boolean isFullScreen();
 
         /**
-         * toggle fullScreen
+         * 切换到全屏播放
          */
         void toggleFullScreen();
 
         /**
-         * exit media player
+         * 退出播放器
          */
         void exit();
     }
