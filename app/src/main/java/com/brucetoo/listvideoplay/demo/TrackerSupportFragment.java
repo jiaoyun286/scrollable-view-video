@@ -1,7 +1,5 @@
 package com.brucetoo.listvideoplay.demo;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.brucetoo.listvideoplay.Backable;
-import com.nd.sdp.player.demo.MainActivity;
 import com.bumptech.glide.Glide;
 import com.nd.sdp.bk.video.R;
+import com.nd.sdp.player.demo.MainActivity;
 import com.nd.sdp.video.scrolldetector.RecyclerScrollDetector;
 import com.nd.sdp.video.tracker.IViewTracker;
 import com.nd.sdp.video.tracker.Tracker;
@@ -65,7 +63,8 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
                     .controller(new DefaultControllerView())
                     .visibleListener(this);
         }
-//        ((MainActivity) getActivity()).addDetailFragment();
+        //无缝平移到详情页面进行播放
+        ((MainActivity) getActivity()).addDetailFragment();
 
     }
 
@@ -98,7 +97,12 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
 
     @Override
     public void onVideoCompletion(IViewTracker viewTracker) {
-        viewTracker.detach();
+        //全屏播放，先切回竖屏
+        if(viewTracker.isFullScreen()){
+            viewTracker.toNormalScreen();
+        }
+        //将回退栈最上面的页面移除
+        onBackPressed();
     }
 
     @Override
@@ -143,7 +147,6 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
 
     @Override
     public boolean onBackPressed() {
-
         if (getActivity() != null){
             if(Tracker.isAttach(getActivity())){
                 Tracker.destroy(getActivity());
@@ -173,24 +176,6 @@ public class TrackerSupportFragment extends Fragment implements View.OnClickList
         public void setOnClickListener(View.OnClickListener onClickListener){
             if(mWeakReference == null){
                 mWeakReference = new WeakReference<>(onClickListener);
-            }
-        }
-
-        @Override
-        public void onViewDetachedFromWindow(VideoHolder holder) {
-            super.onViewDetachedFromWindow(holder);
-            Context context = holder.coverImage.getContext();
-            if(context instanceof Activity){
-                IViewTracker tracker = Tracker.getViewTracker((Activity) context);
-                if(tracker != null && !tracker.isFullScreen()){
-                    View trackerView = tracker.getTrackerView();
-                    if (trackerView != null && trackerView.equals(holder.coverImage.findViewById(tracker.getTrackerViewId()))) {
-                        //TODO Configuration Changed may cause problem
-                        Log.e(TAG, "onViewDetachedFromWindow -> " + holder.coverImage.findViewById(R.id.view_tracker));
-                        Tracker.detach((Activity) context);
-                    }
-                }
-
             }
         }
 

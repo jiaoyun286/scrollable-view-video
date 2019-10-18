@@ -6,10 +6,11 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.brucetoo.listvideoplay.demo.ListSupportFragment;
-import com.brucetoo.listvideoplay.demo.PagerSupportFragment;
 import com.nd.sdp.bk.video.R;
+import com.nd.sdp.video.tracker.IViewTracker;
 import com.nd.sdp.video.tracker.Tracker;
 
 /**
@@ -33,11 +34,16 @@ public class PagerSupportActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         boolean attach = Tracker.isAttach(this);
         if(attach){
-            Tracker.destroy(this);
+            IViewTracker viewTracker = Tracker.getViewTracker(this);
+            if(viewTracker.isFullScreen()){
+                viewTracker.toNormalScreen();
+                return;
+            }
         }
+        Tracker.destroy(this);
+        super.onBackPressed();
     }
 
     @Override
